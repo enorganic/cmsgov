@@ -7,7 +7,7 @@ nav:
 - API Reference:
     - provider_data:
       - client: 'api/provider_data/v1/client.md'
-      - model: 'api/provider_data/model.md'
+      - model: 'api/provider_data/v1/model.md'
 - Contributing: 'contributing.md'
 theme:
   name: material
