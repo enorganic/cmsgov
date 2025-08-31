@@ -5,7 +5,7 @@
 An SDK (software development kit) for CMS.gov APIs. Currently implemented
 APIs include:
 
-- [CMS.gov's Provider Data API](https://data.cms.gov/provider-data/docs)
+- [Provider Data](https://data.cms.gov/provider-data/docs)
 
 (more to come)
 
