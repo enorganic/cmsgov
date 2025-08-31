@@ -139,7 +139,7 @@ namespace_packages = true
 explicit_package_bases = true
 
 [tool.coverage.report]
-fail_under = 1
+fail_under = 80
 
 [tool.coverage.run]
 source = [

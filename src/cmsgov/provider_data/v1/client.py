@@ -166,7 +166,7 @@ class Client(oapi.client.Client):
         results: bool | None = None,
         schema: bool | None = None,
         keys: bool | None = None,
-        format: str | None = None,
+        format_: str | None = None,
         row_ids: bool | None = None,
         resources: (
             model.DatastoreQueryResources
@@ -210,7 +210,7 @@ class Client(oapi.client.Client):
             results:
             schema:
             keys:
-            format:
+            format_:
             row_ids:
             resources: Resources to query against and aliases. Usually you
                 will add only one resource to this array, but if performing a
@@ -265,7 +265,7 @@ class Client(oapi.client.Client):
                 ),
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
                     style="deepObject",
                     explode=True,
                 ),
@@ -358,7 +358,7 @@ class Client(oapi.client.Client):
         results: bool | None = None,
         schema: bool | None = None,
         keys: bool | None = None,
-        format: str | None = None,
+        format_: str | None = None,
         row_ids: bool | None = None,
         resources: (
             model.DatastoreQueryResources
@@ -399,7 +399,7 @@ class Client(oapi.client.Client):
             results:
             schema:
             keys:
-            format:
+            format_:
             row_ids:
             resources: Resources to query against and aliases. Usually you
                 will add only one resource to this array, but if performing a
@@ -454,7 +454,7 @@ class Client(oapi.client.Client):
                 ),
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
                     style="deepObject",
                     explode=True,
                 ),
@@ -543,8 +543,32 @@ class Client(oapi.client.Client):
         results: bool | None = None,
         schema: bool | None = None,
         keys: bool | None = None,
-        format: str | None = None,
+        format_: str | None = None,
         row_ids: bool | None = None,
+        resources: (
+            model.DatastoreQueryResources
+            | None
+        ) = None,
+        properties: (
+            model.DatastoreQueryProperties
+            | None
+        ) = None,
+        conditions: (
+            model.DatastoreQueryConditions
+            | None
+        ) = None,
+        joins: (
+            model.DatastoreQueryJoins
+            | None
+        ) = None,
+        groupings: (
+            model.DatastoreQueryGroupings
+            | None
+        ) = None,
+        sorts: (
+            model.DatastoreQuerySorts
+            | None
+        ) = None,
     ) -> (
         model.JsonOrCsvQueryOkResponse
         | str
@@ -564,8 +588,18 @@ class Client(oapi.client.Client):
             results:
             schema:
             keys:
-            format:
+            format_:
             row_ids:
+            resources: Resources to query against and aliases. Usually you
+                will add only one resource to this array, but if performing a
+                join, list the primary resource first and then add resources to
+                be used in the joins array.
+            properties:
+            conditions: Conditions or groups of conditions for the query,
+                bound by 'and' operator.
+            joins: Joins
+            groupings: Properties or aliases to group results by.
+            sorts: Result sorting directives.
         """
         response: sob.abc.Readable = self.request(
             "/datastore/query/{distributionId}".format(**{
@@ -616,13 +650,49 @@ class Client(oapi.client.Client):
                 ),
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
                     style="deepObject",
                     explode=True,
                 ),
                 "rowIds": oapi.client.format_argument_value(
                     "rowIds",
                     row_ids,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "resources": oapi.client.format_argument_value(
+                    "resources",
+                    resources,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "properties": oapi.client.format_argument_value(
+                    "properties",
+                    properties,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "conditions": oapi.client.format_argument_value(
+                    "conditions",
+                    conditions,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "joins": oapi.client.format_argument_value(
+                    "joins",
+                    joins,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "groupings": oapi.client.format_argument_value(
+                    "groupings",
+                    groupings,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "sorts": oapi.client.format_argument_value(
+                    "sorts",
+                    sorts,
                     style="deepObject",
                     explode=True,
                 ),
@@ -687,8 +757,32 @@ class Client(oapi.client.Client):
         results: bool | None = None,
         schema: bool | None = None,
         keys: bool | None = None,
-        format: str | None = None,
+        format_: str | None = None,
         row_ids: bool | None = None,
+        resources: (
+            model.DatastoreQueryResources
+            | None
+        ) = None,
+        properties: (
+            model.DatastoreQueryProperties
+            | None
+        ) = None,
+        conditions: (
+            model.DatastoreQueryConditions
+            | None
+        ) = None,
+        joins: (
+            model.DatastoreQueryJoins
+            | None
+        ) = None,
+        groupings: (
+            model.DatastoreQueryGroupings
+            | None
+        ) = None,
+        sorts: (
+            model.DatastoreQuerySorts
+            | None
+        ) = None,
     ) -> (
         model.JsonOrCsvQueryOkResponse
         | str
@@ -711,8 +805,18 @@ class Client(oapi.client.Client):
             results:
             schema:
             keys:
-            format:
+            format_:
             row_ids:
+            resources: Resources to query against and aliases. Usually you
+                will add only one resource to this array, but if performing a
+                join, list the primary resource first and then add resources to
+                be used in the joins array.
+            properties:
+            conditions: Conditions or groups of conditions for the query,
+                bound by 'and' operator.
+            joins: Joins
+            groupings: Properties or aliases to group results by.
+            sorts: Result sorting directives.
         """
         response: sob.abc.Readable = self.request(
             "/datastore/query/{datasetId}/{index}".format(**{
@@ -769,13 +873,49 @@ class Client(oapi.client.Client):
                 ),
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
                     style="deepObject",
                     explode=True,
                 ),
                 "rowIds": oapi.client.format_argument_value(
                     "rowIds",
                     row_ids,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "resources": oapi.client.format_argument_value(
+                    "resources",
+                    resources,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "properties": oapi.client.format_argument_value(
+                    "properties",
+                    properties,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "conditions": oapi.client.format_argument_value(
+                    "conditions",
+                    conditions,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "joins": oapi.client.format_argument_value(
+                    "joins",
+                    joins,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "groupings": oapi.client.format_argument_value(
+                    "groupings",
+                    groupings,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "sorts": oapi.client.format_argument_value(
+                    "sorts",
+                    sorts,
                     style="deepObject",
                     explode=True,
                 ),
@@ -843,7 +983,31 @@ class Client(oapi.client.Client):
         self,
         distribution_id: str,
         *,
-        format: str | None = None,
+        format_: str | None = None,
+        resources: (
+            model.DatastoreQueryResources
+            | None
+        ) = None,
+        properties: (
+            model.DatastoreQueryProperties
+            | None
+        ) = None,
+        conditions: (
+            model.DatastoreQueryConditions
+            | None
+        ) = None,
+        joins: (
+            model.DatastoreQueryJoins
+            | None
+        ) = None,
+        groupings: (
+            model.DatastoreQueryGroupings
+            | None
+        ) = None,
+        sorts: (
+            model.DatastoreQuerySorts
+            | None
+        ) = None,
     ) -> str:
         """
         Like the other datastore query GET endpoints, additional parameters may
@@ -852,7 +1016,17 @@ class Client(oapi.client.Client):
 
         Parameters:
             distribution_id: A distribution ID
-            format: Response format. Currently, only csv is supported.
+            format_: Response format. Currently, only csv is supported.
+            resources: Resources to query against and aliases. Usually you
+                will add only one resource to this array, but if performing a
+                join, list the primary resource first and then add resources to
+                be used in the joins array.
+            properties:
+            conditions: Conditions or groups of conditions for the query,
+                bound by 'and' operator.
+            joins: Joins
+            groupings: Properties or aliases to group results by.
+            sorts: Result sorting directives.
         """
         response: sob.abc.Readable = self.request(
             "/datastore/query/{distributionId}/download".format(**{
@@ -867,7 +1041,43 @@ class Client(oapi.client.Client):
             query={
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "resources": oapi.client.format_argument_value(
+                    "resources",
+                    resources,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "properties": oapi.client.format_argument_value(
+                    "properties",
+                    properties,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "conditions": oapi.client.format_argument_value(
+                    "conditions",
+                    conditions,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "joins": oapi.client.format_argument_value(
+                    "joins",
+                    joins,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "groupings": oapi.client.format_argument_value(
+                    "groupings",
+                    groupings,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "sorts": oapi.client.format_argument_value(
+                    "sorts",
+                    sorts,
                     style="deepObject",
                     explode=True,
                 ),
@@ -885,7 +1095,31 @@ class Client(oapi.client.Client):
         dataset_id: str,
         index: int,
         *,
-        format: str | None = None,
+        format_: str | None = None,
+        resources: (
+            model.DatastoreQueryResources
+            | None
+        ) = None,
+        properties: (
+            model.DatastoreQueryProperties
+            | None
+        ) = None,
+        conditions: (
+            model.DatastoreQueryConditions
+            | None
+        ) = None,
+        joins: (
+            model.DatastoreQueryJoins
+            | None
+        ) = None,
+        groupings: (
+            model.DatastoreQueryGroupings
+            | None
+        ) = None,
+        sorts: (
+            model.DatastoreQuerySorts
+            | None
+        ) = None,
     ) -> str:
         """
         Like the other datastore query GET endpoints, additional parameters may
@@ -897,7 +1131,17 @@ class Client(oapi.client.Client):
             index: The index of a distribution in a dataset's distribution
                 array. For instance, the first distribution in a dataset would
                 have an index of "0," the second would have "1", etc.
-            format: Response format. Currently, only csv is supported.
+            format_: Response format. Currently, only csv is supported.
+            resources: Resources to query against and aliases. Usually you
+                will add only one resource to this array, but if performing a
+                join, list the primary resource first and then add resources to
+                be used in the joins array.
+            properties:
+            conditions: Conditions or groups of conditions for the query,
+                bound by 'and' operator.
+            joins: Joins
+            groupings: Properties or aliases to group results by.
+            sorts: Result sorting directives.
         """
         response: sob.abc.Readable = self.request(
             "/datastore/query/{datasetId}/{index}/download".format(**{
@@ -918,7 +1162,43 @@ class Client(oapi.client.Client):
             query={
                 "format": oapi.client.format_argument_value(
                     "format",
-                    format,
+                    format_,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "resources": oapi.client.format_argument_value(
+                    "resources",
+                    resources,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "properties": oapi.client.format_argument_value(
+                    "properties",
+                    properties,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "conditions": oapi.client.format_argument_value(
+                    "conditions",
+                    conditions,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "joins": oapi.client.format_argument_value(
+                    "joins",
+                    joins,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "groupings": oapi.client.format_argument_value(
+                    "groupings",
+                    groupings,
+                    style="deepObject",
+                    explode=True,
+                ),
+                "sorts": oapi.client.format_argument_value(
+                    "sorts",
+                    sorts,
                     style="deepObject",
                     explode=True,
                 ),
@@ -1439,8 +1719,8 @@ class Client(oapi.client.Client):
 
     def patch_metastore_schemas_dataset_items(
         self,
-        metastore_schemas_dataset_items_patch_request_body_content_application_json_schema: (  # noqa: E501
-            model.MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchema  # noqa: E501
+        metastore_schemas_dataset_items_patch_request: (
+            model.MetastoreSchemasDatasetItemsPatchRequest
         ),
         identifier: str,
     ) -> model.MetastoreWriteResponse:
@@ -1452,12 +1732,11 @@ class Client(oapi.client.Client):
         changing values, removing unchanged properties, and pasting to test.
 
         Parameters:
-             metastore_schemas_dataset_items_patch_request_body_content_application_json_schema
-                : The metadata format for all federal open data. Validates a
-                single JSON object entry (as opposed to entire Data.json
-                catalog).
+            metastore_schemas_dataset_items_patch_request: The metadata
+                format for all federal open data. Validates a single JSON
+                object entry (as opposed to entire Data.json catalog).
             identifier: A dataset identifier
-        """  # noqa: E501
+        """
         response: sob.abc.Readable = self.request(
             "/metastore/schemas/dataset/items".format(**{
                 "identifier": str(oapi.client.format_argument_value(
@@ -1468,7 +1747,7 @@ class Client(oapi.client.Client):
                 )),
             }),
             method="PATCH",
-            json=metastore_schemas_dataset_items_patch_request_body_content_application_json_schema,  # noqa: E501
+            json=metastore_schemas_dataset_items_patch_request,
         )
         return sob.unmarshal(  # type: ignore
             sob.deserialize(response),
@@ -1563,8 +1842,8 @@ class Client(oapi.client.Client):
 
     def patch_metastore_schemas_dataset_items_identifier(
         self,
-        metastore_schemas_dataset_items_identifier_patch_request_body_content_application_json_schema: (  # noqa: E501
-            model.MetastoreSchemasDatasetItemsIdentifierPatchRequestBodyContentApplicationJsonSchema  # noqa: E501
+        metastore_schemas_dataset_items_identifier_patch_request: (
+            model.MetastoreSchemasDatasetItemsIdentifierPatchRequest
         ),
         identifier: str,
     ) -> model.MetastoreWriteResponse:
@@ -1576,12 +1855,11 @@ class Client(oapi.client.Client):
         changing values, removing unchanged properties, and pasting to test.
 
         Parameters:
-             metastore_schemas_dataset_items_identifier_patch_request_body_content_application_json_schema
-                : The metadata format for all federal open data. Validates a
-                single JSON object entry (as opposed to entire Data.json
-                catalog).
+            metastore_schemas_dataset_items_identifier_patch_request: The
+                metadata format for all federal open data. Validates a single
+                JSON object entry (as opposed to entire Data.json catalog).
             identifier: A dataset identifier
-        """  # noqa: E501
+        """
         response: sob.abc.Readable = self.request(
             "/metastore/schemas/dataset/items/{identifier}".format(**{
                 "identifier": str(oapi.client.format_argument_value(
@@ -1592,7 +1870,7 @@ class Client(oapi.client.Client):
                 )),
             }),
             method="PATCH",
-            json=metastore_schemas_dataset_items_identifier_patch_request_body_content_application_json_schema,  # noqa: E501
+            json=metastore_schemas_dataset_items_identifier_patch_request,
         )
         return sob.unmarshal(  # type: ignore
             sob.deserialize(response),

@@ -2343,7 +2343,8 @@ class FacetsItem(sob.Object):
             | None
         ) = None,
         total: (
-            int
+            str
+            | int
             | None
         ) = None
     ) -> None:
@@ -2356,7 +2357,8 @@ class FacetsItem(sob.Object):
             | None
         ) = name
         self.total: (
-            int
+            str
+            | int
             | None
         ) = total
         super().__init__(_data)
@@ -3051,9 +3053,7 @@ class HarvestRunsPostResponse(sob.Object):
         super().__init__(_data)
 
 
-class MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchema(
-    sob.Object
-):
+class MetastoreSchemasDatasetItemsPatchRequest(sob.Object):
     """
     The metadata format for all federal open data. Validates a single JSON
     object entry (as opposed to entire Data.json catalog).
@@ -3820,9 +3820,7 @@ class MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchemaTh
         super().__init__(items)
 
 
-class MetastoreSchemasDatasetItemsIdentifierPatchRequestBodyContentApplicationJsonSchema(  # noqa: E501
-    sob.Object
-):
+class MetastoreSchemasDatasetItemsIdentifierPatchRequest(sob.Object):
     """
     The metadata format for all federal open data. Validates a single JSON
     object entry (as opposed to entire Data.json catalog).
@@ -4752,11 +4750,13 @@ class SearchGetResponse(sob.Object):
             | None
         ) = None,
         total: (
-            int
+            str
+            | int
             | None
         ) = None,
         results: (
-            sob.Dictionary
+            sob.Array
+            | sob.Dictionary
             | None
         ) = None,
         facets: (
@@ -4765,11 +4765,13 @@ class SearchGetResponse(sob.Object):
         ) = None
     ) -> None:
         self.total: (
-            int
+            str
+            | int
             | None
         ) = total
         self.results: (
-            sob.Dictionary
+            sob.Array
+            | sob.Dictionary
             | None
         ) = results
         self.facets: (
@@ -4784,11 +4786,16 @@ class SearchFacetsGetResponse(sob.Object):
     Attributes:
         facets: Array of facet values.
         time: Execution time.
+        results: An object with keys following the format "dkan_dataset/[
+            uuid]", containing full dataset objects from the DKAN metastore.
+        total: Total search results for query.
     """
 
     __slots__: tuple[str, ...] = (
         "facets",
         "time",
+        "results",
+        "total",
     )
 
     def __init__(
@@ -4820,6 +4827,16 @@ class SearchFacetsGetResponse(sob.Object):
             | int
             | decimal.Decimal
             | None
+        ) = None,
+        results: (
+            sob.Array
+            | sob.Dictionary
+            | None
+        ) = None,
+        total: (
+            str
+            | int
+            | None
         ) = None
     ) -> None:
         self.facets: (
@@ -4832,6 +4849,16 @@ class SearchFacetsGetResponse(sob.Object):
             | decimal.Decimal
             | None
         ) = time
+        self.results: (
+            sob.Array
+            | sob.Dictionary
+            | None
+        ) = results
+        self.total: (
+            str
+            | int
+            | None
+        ) = total
         super().__init__(_data)
 
 
@@ -5739,7 +5766,15 @@ sob.get_writable_object_meta(  # type: ignore
         )
     ),
     ('name', sob.StringProperty()),
-    ('total', sob.IntegerProperty())
+    (
+        'total',
+        sob.Property(
+            types=sob.MutableTypes([
+                str,
+                int
+            ])
+        )
+    )
 ])
 sob.get_writable_object_meta(  # type: ignore
     HarvestPlan
@@ -5942,7 +5977,7 @@ sob.get_writable_object_meta(  # type: ignore
     )
 ])
 sob.get_writable_object_meta(  # type: ignore
-    MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchema  # noqa: E501
+    MetastoreSchemasDatasetItemsPatchRequest
 ).properties = sob.Properties([
     (
         'type_',
@@ -6252,7 +6287,7 @@ sob.get_writable_array_meta(  # type: ignore
     sob.StringProperty()
 ])
 sob.get_writable_object_meta(  # type: ignore
-    MetastoreSchemasDatasetItemsIdentifierPatchRequestBodyContentApplicationJsonSchema  # noqa: E501
+    MetastoreSchemasDatasetItemsIdentifierPatchRequest
 ).properties = sob.Properties([
     (
         'type_',
@@ -6604,11 +6639,20 @@ sob.get_writable_array_meta(  # type: ignore
 sob.get_writable_object_meta(  # type: ignore
     SearchGetResponse
 ).properties = sob.Properties([
-    ('total', sob.IntegerProperty()),
+    (
+        'total',
+        sob.Property(
+            types=sob.MutableTypes([
+                str,
+                int
+            ])
+        )
+    ),
     (
         'results',
         sob.Property(
             types=sob.MutableTypes([
+                sob.Array,
                 sob.Dictionary
             ])
         )
@@ -6633,7 +6677,25 @@ sob.get_writable_object_meta(  # type: ignore
             ])
         )
     ),
-    ('time', sob.NumberProperty())
+    ('time', sob.NumberProperty()),
+    (
+        'results',
+        sob.Property(
+            types=sob.MutableTypes([
+                sob.Array,
+                sob.Dictionary
+            ])
+        )
+    ),
+    (
+        'total',
+        sob.Property(
+            types=sob.MutableTypes([
+                str,
+                int
+            ])
+        )
+    )
 ])
 # The following is used to retain class names when re-generating
 # this model from an updated OpenAPI document
@@ -6733,7 +6795,7 @@ _POINTERS_CLASSES: typing.Dict[str, typing.Type[sob.abc.Model]] = {
     "#/paths/~1harvest~1runs/post/responses/200/content/application~1json/schema":  # noqa
     HarvestRunsPostResponse,
     "#/paths/~1metastore~1schemas~1dataset~1items/patch/requestBody/content/application~1json/schema":  # noqa
-    MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchema,
+    MetastoreSchemasDatasetItemsPatchRequest,
     "#/paths/~1metastore~1schemas~1dataset~1items/patch/requestBody/content/application~1json/schema/properties/bureauCode":  # noqa
     MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchemaBureauCode,  # noqa
     "#/paths/~1metastore~1schemas~1dataset~1items/patch/requestBody/content/application~1json/schema/properties/contactPoint":  # noqa
@@ -6753,7 +6815,7 @@ _POINTERS_CLASSES: typing.Dict[str, typing.Type[sob.abc.Model]] = {
     "#/paths/~1metastore~1schemas~1dataset~1items/patch/requestBody/content/application~1json/schema/properties/theme":  # noqa
     MetastoreSchemasDatasetItemsPatchRequestBodyContentApplicationJsonSchemaTheme,  # noqa
     "#/paths/~1metastore~1schemas~1dataset~1items~1{identifier}/patch/requestBody/content/application~1json/schema":  # noqa
-    MetastoreSchemasDatasetItemsIdentifierPatchRequestBodyContentApplicationJsonSchema,  # noqa
+    MetastoreSchemasDatasetItemsIdentifierPatchRequest,
     "#/paths/~1metastore~1schemas~1dataset~1items~1{identifier}/patch/requestBody/content/application~1json/schema/properties/bureauCode":  # noqa
     MetastoreSchemasDatasetItemsIdentifierPatchRequestBodyContentApplicationJsonSchemaBureauCode,  # noqa
     "#/paths/~1metastore~1schemas~1dataset~1items~1{identifier}/patch/requestBody/content/application~1json/schema/properties/contactPoint":  # noqa

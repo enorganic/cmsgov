@@ -510,6 +510,65 @@
                     },
                     {
                         "$ref": "#/components/parameters/datastoreQueryRowIds"
+                    },
+                    {
+                        "name": "resources",
+                        "in": "query",
+                        "description": "Resources to query against and aliases. Usually you will add only one resource to this array, but if performing a join, list the primary resource first and then add resources to be used in the joins array.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/resources"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/properties"
+                        }
+                    },
+                    {
+                        "name": "conditions",
+                        "in": "query",
+                        "description": "Conditions or groups of conditions for the query, bound by 'and' operator.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/conditions"
+                        }
+                    },
+                    {
+                        "name": "joins",
+                        "in": "query",
+                        "description": "Joins",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/joins"
+                        }
+                    },
+                    {
+                        "name": "groupings",
+                        "in": "query",
+                        "description": "Properties or aliases to group results by.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/groupings"
+                        }
+                    },
+                    {
+                        "name": "sorts",
+                        "in": "query",
+                        "description": "Result sorting directives.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/sorts"
+                        }
                     }
                 ],
                 "responses": {
@@ -607,6 +666,65 @@
                     },
                     {
                         "$ref": "#/components/parameters/datastoreQueryRowIds"
+                    },
+                    {
+                        "name": "resources",
+                        "in": "query",
+                        "description": "Resources to query against and aliases. Usually you will add only one resource to this array, but if performing a join, list the primary resource first and then add resources to be used in the joins array.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/resources"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/properties"
+                        }
+                    },
+                    {
+                        "name": "conditions",
+                        "in": "query",
+                        "description": "Conditions or groups of conditions for the query, bound by 'and' operator.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/conditions"
+                        }
+                    },
+                    {
+                        "name": "joins",
+                        "in": "query",
+                        "description": "Joins",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/joins"
+                        }
+                    },
+                    {
+                        "name": "groupings",
+                        "in": "query",
+                        "description": "Properties or aliases to group results by.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/groupings"
+                        }
+                    },
+                    {
+                        "name": "sorts",
+                        "in": "query",
+                        "description": "Result sorting directives.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/sorts"
+                        }
                     }
                 ],
                 "responses": {
@@ -691,6 +809,65 @@
                             "type": "string"
                         },
                         "example": "csv"
+                    },
+                    {
+                        "name": "resources",
+                        "in": "query",
+                        "description": "Resources to query against and aliases. Usually you will add only one resource to this array, but if performing a join, list the primary resource first and then add resources to be used in the joins array.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/resources"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/properties"
+                        }
+                    },
+                    {
+                        "name": "conditions",
+                        "in": "query",
+                        "description": "Conditions or groups of conditions for the query, bound by 'and' operator.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/conditions"
+                        }
+                    },
+                    {
+                        "name": "joins",
+                        "in": "query",
+                        "description": "Joins",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/joins"
+                        }
+                    },
+                    {
+                        "name": "groupings",
+                        "in": "query",
+                        "description": "Properties or aliases to group results by.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/groupings"
+                        }
+                    },
+                    {
+                        "name": "sorts",
+                        "in": "query",
+                        "description": "Result sorting directives.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/sorts"
+                        }
                     }
                 ],
                 "responses": {
@@ -731,6 +908,65 @@
                             "type": "string"
                         },
                         "example": "csv"
+                    },
+                    {
+                        "name": "resources",
+                        "in": "query",
+                        "description": "Resources to query against and aliases. Usually you will add only one resource to this array, but if performing a join, list the primary resource first and then add resources to be used in the joins array.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/resources"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/properties"
+                        }
+                    },
+                    {
+                        "name": "conditions",
+                        "in": "query",
+                        "description": "Conditions or groups of conditions for the query, bound by 'and' operator.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/conditions"
+                        }
+                    },
+                    {
+                        "name": "joins",
+                        "in": "query",
+                        "description": "Joins",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/joins"
+                        }
+                    },
+                    {
+                        "name": "groupings",
+                        "in": "query",
+                        "description": "Properties or aliases to group results by.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/groupings"
+                        }
+                    },
+                    {
+                        "name": "sorts",
+                        "in": "query",
+                        "description": "Result sorting directives.",
+                        "required": false,
+                        "style": "deepObject",
+                        "schema": {
+                            "$ref": "#/components/schemas/datastoreQuery/properties/sorts"
+                        }
                     }
                 ],
                 "responses": {
@@ -2281,11 +2517,25 @@
                                     "properties": {
                                         "total": {
                                             "description": "Total search results for query.",
-                                            "type": "integer"
+                                            "anyOf": [
+                                                {
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
                                         },
                                         "results": {
                                             "description": "An object with keys following the format \"dkan_dataset/[uuid]\", containing full dataset objects from the DKAN metastore.",
-                                            "type": "object"
+                                            "anyOf": [
+                                                {
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "type": "array"
+                                                }
+                                            ]
                                         },
                                         "facets": {
                                             "$ref": "#/components/schemas/facets"
@@ -2329,6 +2579,28 @@
                                         "time": {
                                             "description": "Execution time.",
                                             "type": "number"
+                                        },
+                                        "results": {
+                                            "description": "An object with keys following the format \"dkan_dataset/[uuid]\", containing full dataset objects from the DKAN metastore.",
+                                            "anyOf": [
+                                                {
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "type": "array"
+                                                }
+                                            ]
+                                        },
+                                        "total": {
+                                            "description": "Total search results for query.",
+                                            "anyOf": [
+                                                {
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
                                         }
                                     },
                                     "type": "object"
@@ -3334,7 +3606,14 @@
                         },
                         "total": {
                             "description": "Number of results in the current result set that match this filter.",
-                            "type": "integer"
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
                         }
                     },
                     "type": "object"

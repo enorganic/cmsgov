@@ -36,7 +36,10 @@ CLIENT_PY: dict[str, Path] = {
 }
 
 STRING_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="string")
+INTEGER_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="integer")
 BOOLEAN_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="boolean")
+OBJECT_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="object")
+ARRAY_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="array")
 
 if TYPE_CHECKING:
     import sob
@@ -112,7 +115,6 @@ def fix_provider_data_openapi(
         oapi.oas.Paths, openapi_document.paths
     )
     path: str
-    path_item: oapi.oas.PathItem
     for path in tuple(openapi_document_paths.keys()):
         if not path.startswith("/provider-data/api/1/"):
             raise ValueError(path)
@@ -171,6 +173,32 @@ def fix_provider_data_openapi(
             "/paths/~1datastore~1query~1download/get/parameters",
         )
     )
+    get_datastore_query_distribution_id_parameters: sob.abc.Array = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1datastore~1query~1{distributionId}/get/parameters",
+        )
+    )
+    get_datastore_query_distribution_id_download_parameters: sob.abc.Array = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1datastore~1query~1{distributionId}~1download"
+            "/get/parameters",
+        )
+    )
+    get_datastore_query_dataset_id_index_parameters: sob.abc.Array = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1datastore~1query~1{datasetId}~1{index}/get/parameters",
+        )
+    )
+    get_datastore_query_dataset_id_index_download_parameters: sob.abc.Array = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1datastore~1query~1{datasetId}~1{index}~1download"
+            "/get/parameters",
+        )
+    )
     parameter_name: str
     for parameter_name in (
         "resources",
@@ -200,6 +228,14 @@ def fix_provider_data_openapi(
         )
         get_datastore_query_download_parameters.append(parameter)
         get_datastore_query_parameters.append(parameter)
+        get_datastore_query_distribution_id_parameters.append(parameter)
+        get_datastore_query_distribution_id_download_parameters.append(
+            parameter
+        )
+        get_datastore_query_dataset_id_index_parameters.append(parameter)
+        get_datastore_query_dataset_id_index_download_parameters.append(
+            parameter
+        )
     # Fix component parameters
     parameters: oapi.oas.Parameters = cast(
         oapi.oas.Parameters,
@@ -230,10 +266,54 @@ def fix_provider_data_openapi(
             )
         )
     )
-    # json_or_csv_query_ok_response_results_schema: oapi.oas.Schema = cast(
-    #     oapi.oas.Properties, json_or_csv_query_ok_response_schema.properties
-    # )["results"]
-    # 200JsonOrCsvQueryOk
+    # Fix search GET response data types
+    search_get_response_schema_properties: oapi.oas.Properties = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1search/get/responses/200/content/application~1json"
+            "/schema/properties",
+        )
+    )
+    # The total property can be either a string or an integer
+    total_type: oapi.oas.Schema = cast(
+        oapi.oas.Schema,
+        search_get_response_schema_properties["total"],
+    )
+    total_type.any_of = (STRING_SCHEMA, INTEGER_SCHEMA)
+    total_type.type_ = None
+    # The results property can be an array
+    results_type: oapi.oas.Schema = cast(
+        oapi.oas.Schema,
+        search_get_response_schema_properties["results"],
+    )
+    results_type.any_of = (OBJECT_SCHEMA, ARRAY_SCHEMA)
+    results_type.type_ = None
+    # Fix search facets GET response data types
+    search_facets_get_response_schema_properties: oapi.oas.Properties = (
+        jsonpointer.resolve_pointer(
+            openapi_document,
+            "/paths/~1search~1facets/get/responses/200/content"
+            "/application~1json/schema/properties",
+        )
+    )
+    search_facets_get_response_schema_properties["results"] = (
+        search_get_response_schema_properties["results"]
+    )
+    search_facets_get_response_schema_properties["total"] = (
+        search_get_response_schema_properties["total"]
+    )
+    # Fix facets items data type
+    facets_items_properties: oapi.oas.Properties = jsonpointer.resolve_pointer(
+        openapi_document, "/components/schemas/facets/items/properties"
+    )
+    facets_items_properties_total_schema: oapi.oas.Schema = (
+        facets_items_properties["total"]
+    )
+    facets_items_properties_total_schema.any_of = (
+        STRING_SCHEMA,
+        INTEGER_SCHEMA,
+    )
+    facets_items_properties_total_schema.type_ = None
 
 
 def download(
