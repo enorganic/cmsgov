@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cmsgov"
-version = "0.0.0a0"
+version = "0.0.0a1"
 description = ""
 readme = "README.md"
 license = "MIT"

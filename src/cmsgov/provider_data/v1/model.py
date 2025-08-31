@@ -1185,8 +1185,8 @@ class DatastoreQueryProperties(sob.Array):
         items: (
             typing.Iterable[
                 str
-                | DatastoreQueryPropertiesItemAnyOf1
-                | DatastoreQueryPropertiesItemAnyOf2
+                | DatastoreQueryPropertyResource
+                | DatastoreQueryPropertyExpression
             ]
             | sob.abc.Readable
             | str
@@ -1197,7 +1197,7 @@ class DatastoreQueryProperties(sob.Array):
         super().__init__(items)
 
 
-class DatastoreQueryPropertiesItemAnyOf1(sob.Object):
+class DatastoreQueryPropertyResource(sob.Object):
     """
     Attributes:
         resource: Alias to resource set in resources array. Not needed when
@@ -1261,7 +1261,7 @@ class DatastoreQueryPropertiesItemAnyOf1(sob.Object):
         super().__init__(_data)
 
 
-class DatastoreQueryPropertiesItemAnyOf2(sob.Object):
+class DatastoreQueryPropertyExpression(sob.Object):
     """
     Attributes:
         expression: Arithmetic or aggregate expression performed on one or
@@ -5376,11 +5376,11 @@ sob.get_writable_array_meta(  # type: ignore
     DatastoreQueryProperties
 ).item_types = sob.MutableTypes([
     sob.StringProperty(),
-    DatastoreQueryPropertiesItemAnyOf1,
-    DatastoreQueryPropertiesItemAnyOf2
+    DatastoreQueryPropertyResource,
+    DatastoreQueryPropertyExpression
 ])
 sob.get_writable_object_meta(  # type: ignore
-    DatastoreQueryPropertiesItemAnyOf1
+    DatastoreQueryPropertyResource
 ).properties = sob.Properties([
     (
         'resource',
@@ -5398,7 +5398,7 @@ sob.get_writable_object_meta(  # type: ignore
     ('alias', sob.StringProperty())
 ])
 sob.get_writable_object_meta(  # type: ignore
-    DatastoreQueryPropertiesItemAnyOf2
+    DatastoreQueryPropertyExpression
 ).properties = sob.Properties([
     (
         'expression',
@@ -6730,9 +6730,9 @@ _POINTERS_CLASSES: typing.Dict[str, typing.Type[sob.abc.Model]] = {
     "#/components/schemas/datastoreQuery/properties/properties":
     DatastoreQueryProperties,
     "#/components/schemas/datastoreQuery/properties/properties/items/anyOf/1":
-    DatastoreQueryPropertiesItemAnyOf1,
+    DatastoreQueryPropertyResource,
     "#/components/schemas/datastoreQuery/properties/properties/items/anyOf/2":
-    DatastoreQueryPropertiesItemAnyOf2,
+    DatastoreQueryPropertyExpression,
     "#/components/schemas/datastoreQuery/properties/resources":
     DatastoreQueryResources,
     "#/components/schemas/datastoreQuery/properties/resources/items":
