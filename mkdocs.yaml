@@ -1,4 +1,4 @@
-site_name: CMS.gov Software Development Kit
+site_name: CMS.gov SDK
 site_url: https://cmsgov.enorganic.org
 repo_url: https://github.com/enorganic/cmsgov
 edit_uri: blob/main/docs/
@@ -6,8 +6,8 @@ nav:
 - Introduction: 'index.md'
 - API Reference:
     - provider_data:
-      - client: 'api/provider_data/v1/client.md'
-      - model: 'api/provider_data/v1/model.md'
+      - v1.client: 'api/provider_data/v1/client.md'
+      - v1.model: 'api/provider_data/v1/model.md'
 - Contributing: 'contributing.md'
 theme:
   name: material
