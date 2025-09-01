@@ -236,6 +236,25 @@ def fix_provider_data_openapi(
         get_datastore_query_dataset_id_index_download_parameters.append(
             parameter
         )
+    # Fix datastore/query descriptions to reflect above modifications
+    operation: oapi.oas.Operation
+    operation_pointer: str
+    for operation_pointer in (
+        "/paths/~1datastore~1query/get",
+        "/paths/~1datastore~1query~1download/get",
+        "/paths/~1datastore~1query~1{distributionId}/get",
+        "/paths/~1datastore~1query~1{distributionId}~1download/get",
+        "/paths/~1datastore~1query~1{datasetId}~1{index}/get",
+        "/paths/~1datastore~1query~1{datasetId}~1{index}~1download/get",
+    ):
+        operation = jsonpointer.resolve_pointer(
+            openapi_document,
+            operation_pointer,
+        )
+        # If the description just indicates we should reference the POST
+        # operation, remove it.
+        if operation.description and ("POST" in operation.description):
+            operation.description = None
     # Fix component parameters
     parameters: oapi.oas.Parameters = cast(
         oapi.oas.Parameters,
@@ -448,12 +467,11 @@ def update_client(name: str) -> None:
         open_api=open_api,
         model_path=model_py,
         include_init_parameters=(
-            # TODO: Remove unused parameters from this tuple
             "url",
             "user",
             "password",
             # "bearer_token",
-            "api_key",
+            # "api_key",
             # "api_key_in",
             # "api_key_name",
             # "oauth2_client_id",

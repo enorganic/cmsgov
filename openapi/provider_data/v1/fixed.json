@@ -184,7 +184,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query one or more datastore resources",
-                "description": "Simple GET equivalent of a POST query. Note that parameters containing arrays or objects are not yet supported by SwaggerUI. For conditions, sorts, and other complex parameters, write your query in JSON and then convert to a nested query string. See [this web tool](https://www.convertonline.io/convert/json-to-query-string) for an example.",
                 "operationId": "datastore-query-get",
                 "parameters": [
                     {
@@ -329,7 +328,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query one or more datastore resources for file download with get",
-                "description": "Simple GET equivalent of a POST query. Note that parameters containing arrays or objects are not yet supported by SwaggerUI. For conditions, sorts, and other complex parameters, write your query in JSON and then convert to a nested query string. See [this web tool](https://www.convertonline.io/convert/json-to-query-string) for an example.",
                 "operationId": "datastore-query-download-get",
                 "parameters": [
                     {
@@ -481,7 +479,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query a single datastore resource with get",
-                "description": "Simple GET equivalent of a POST query. Note that parameters containing arrays or objects are not yet supported by SwaggerUI. For conditions, sorts, and other complex parameters, write your query in JSON and then convert to a nested query string. See [this web tool](https://www.convertonline.io/convert/json-to-query-string) for an example.",
                 "operationId": "datastore-resource-query-get",
                 "parameters": [
                     {
@@ -634,7 +631,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query a single datastore resource with get",
-                "description": "Simple GET equivalent of a POST query -- see the POST endpoint documentation for full query schema. A few basic parameters are provided here as examples. For more reliable queries, write your query in JSON and then convert to a query string. See [this web tool](https://www.convertonline.io/convert/json-to-query-string) for an example.",
                 "operationId": "datastore-datasetindex-query-get",
                 "parameters": [
                     {
@@ -793,7 +789,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query a single datastore resource for file download",
-                "description": "Like the other datastore query GET endpoints, additional parameters may be added by serializing a query JSON object (documented in the POST endpoints) into a query string.",
                 "operationId": "datastore-resource-query-download-get",
                 "parameters": [
                     {
@@ -889,7 +884,6 @@
                     "Datastore: query"
                 ],
                 "summary": "Query a single datastore resource for file download",
-                "description": "Like the other datastore query GET endpoints, additional parameters may be added by serializing a query JSON object (documented in the POST endpoints) into a query string.",
                 "operationId": "datastore-datasetindex-query-download-get",
                 "parameters": [
                     {

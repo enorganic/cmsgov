@@ -16,7 +16,6 @@ class Client(oapi.client.Client):
         ),
         user: str | None = None,
         password: str | None = None,
-        api_key: str | None = None,
         timeout: int = 0,
         retry_number_of_attempts: int = 3,
         logger: Logger | None = None,
@@ -27,7 +26,6 @@ class Client(oapi.client.Client):
             url: The base URL for API requests.
             user: A user name for use with HTTP basic authentication.
             password:  A password for use with HTTP basic authentication.
-            api_key: An API key with which to authenticate requests.
             timeout: The number of seconds before a request will timeout
                 and throw an error. If this is 0 (the default), the system
                 default timeout will be used.
@@ -43,7 +41,6 @@ class Client(oapi.client.Client):
             url=url,
             user=user,
             password=password,
-            api_key=api_key,
             timeout=timeout,
             retry_number_of_attempts=retry_number_of_attempts,
             logger=logger,
@@ -197,11 +194,7 @@ class Client(oapi.client.Client):
         | str
     ):
         """
-        Simple GET equivalent of a POST query. Note that parameters containing
-        arrays or objects are not yet supported by SwaggerUI. For conditions,
-        sorts, and other complex parameters, write your query in JSON and then
-        convert to a nested query string. See [this web tool](https://www.
-        convertonline.io/convert/json-to-query-string) for an example.
+        Query one or more datastore resources
 
         Parameters:
             limit:
@@ -386,11 +379,7 @@ class Client(oapi.client.Client):
         ) = None,
     ) -> str:
         """
-        Simple GET equivalent of a POST query. Note that parameters containing
-        arrays or objects are not yet supported by SwaggerUI. For conditions,
-        sorts, and other complex parameters, write your query in JSON and then
-        convert to a nested query string. See [this web tool](https://www.
-        convertonline.io/convert/json-to-query-string) for an example.
+        Query one or more datastore resources for file download with get
 
         Parameters:
             limit:
@@ -574,11 +563,7 @@ class Client(oapi.client.Client):
         | str
     ):
         """
-        Simple GET equivalent of a POST query. Note that parameters containing
-        arrays or objects are not yet supported by SwaggerUI. For conditions,
-        sorts, and other complex parameters, write your query in JSON and then
-        convert to a nested query string. See [this web tool](https://www.
-        convertonline.io/convert/json-to-query-string) for an example.
+        Query a single datastore resource with get
 
         Parameters:
             distribution_id: A distribution ID
@@ -788,11 +773,7 @@ class Client(oapi.client.Client):
         | str
     ):
         """
-        Simple GET equivalent of a POST query -- see the POST endpoint
-        documentation for full query schema. A few basic parameters are
-        provided here as examples. For more reliable queries, write your query
-        in JSON and then convert to a query string. See [this web tool](https:/
-        /www.convertonline.io/convert/json-to-query-string) for an example.
+        Query a single datastore resource with get
 
         Parameters:
             dataset_id: A dataset ID
@@ -1010,9 +991,7 @@ class Client(oapi.client.Client):
         ) = None,
     ) -> str:
         """
-        Like the other datastore query GET endpoints, additional parameters may
-        be added by serializing a query JSON object (documented in the POST
-        endpoints) into a query string.
+        Query a single datastore resource for file download
 
         Parameters:
             distribution_id: A distribution ID
@@ -1122,9 +1101,7 @@ class Client(oapi.client.Client):
         ) = None,
     ) -> str:
         """
-        Like the other datastore query GET endpoints, additional parameters may
-        be added by serializing a query JSON object (documented in the POST
-        endpoints) into a query string.
+        Query a single datastore resource for file download
 
         Parameters:
             dataset_id: A dataset ID
