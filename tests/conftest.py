@@ -1,4 +1,3 @@
-import os
 
 import pytest
 from dotenv import load_dotenv
@@ -10,6 +9,4 @@ load_dotenv()
 
 @pytest.fixture(name="client", autouse=True, scope="session")
 def get_provider_data_client() -> ProviderDataClient:
-    return ProviderDataClient(
-        api_key=os.environ.get("CMS_GOV_MARKETPLACE_API_KEY"), echo=True
-    )
+    return ProviderDataClient(echo=True)
